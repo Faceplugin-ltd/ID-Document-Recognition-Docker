@@ -1,4 +1,6 @@
-
+<div align="center">
+<img alt="FacePlugin" src="https://avatars.githubusercontent.com/u/160751046?s=200&v=4" width="200"/>
+</div>
 
 #### 🌐 Company Site - [Here](https://faceplugin.com)
 
@@ -97,7 +99,9 @@ You can start **without** a license — the server prints your machine code on s
 
 The API starts even if activation fails. Copy the **machine code** (`FPMC1.…`) from the log and send it to FacePlugin.
 
-
+<p align="center">
+ <img src="assets/screenshots/unactivated.png" alt="Docker logs: machine code printed, activation failed, Flask API still listening" width="900"/>
+</p>
 
 ### Option A — Docker Hub (no Drive download)
 
@@ -227,7 +231,9 @@ curl -s -X POST http://127.0.0.1:8082/api/activate \
 ./run.sh
 ```
 
-
+<p align="center">
+ <img src="assets/screenshots/activate.png" alt="POST /api/activate with license.txt — success true" width="900"/>
+</p>
 
 Use the machine code from the environment you will run in production. **Docker and local host codes are different** — if you run in Docker, send the Docker machine code.
 
@@ -294,12 +300,20 @@ DEMO_PORT=9002 API_BASE=http://127.0.0.1:8082 python3 demo
 
 Open **[http://127.0.0.1:9002](http://127.0.0.1:9002)**. Examples when present: `assets/examples/samples/`. The header shows **License:** (for example `Recognition + Liveness`) from `/api/licenseStatus`.
 
+<p align="center">
+ <img src="assets/screenshots/demo-ui-result.png" alt="Document Reader Gradio demo — Result tab with OCR / MRZ / Barcode fields" width="900"/>
+</p>
 
+<p align="center">
+ <img src="assets/screenshots/demo-ui-security.png" alt="Document Reader Gradio demo — Security tab with OCR / MRZ / Barcode fields" width="900"/>
+</p>
 
-
-
-
-
+<p align="center">
+ <img src="assets/screenshots/demo-ui-images.png" alt="Document Reader Gradio demo — Images tab with OCR / MRZ / Barcode fields" width="900"/>
+</p>
+<p align="center">
+ <img src="assets/screenshots/demo-ui-raw.png" alt="Document Reader Gradio demo — Raw Json tab with OCR / MRZ / Barcode fields" width="900"/>
+</p>
 
 
 - **Result** — status, Verification (Pass / Fail / Not checked), Image QA, and OCR / MRZ / Barcode fields  
@@ -377,4 +391,7 @@ HTTP endpoints: `/api/health`, `/api/machinecode`, `/api/licenseStatus`, `/api/b
 
 ## Contact
 
- 
+<div align="left">
+<a target="_blank" href="mailto:info@faceplugin.com"><img src="https://img.shields.io/badge/email-info@faceplugin.com-blue.svg?logo=gmail" alt="faceplugin.com"></a>&emsp;
+<a target="_blank" href="https://wa.me/+14692784822"><img src="https://img.shields.io/badge/whatsapp-faceplugin-blue.svg?logo=whatsapp" alt="faceplugin.com"></a>
+</div>
