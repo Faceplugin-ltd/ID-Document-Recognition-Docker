@@ -1,10 +1,11 @@
-<div align="center">
-<img alt="FacePlugin" src="https://avatars.githubusercontent.com/u/160751046?s=200&v=4" width="200"/>
-</div>
+
 
 #### 🌐 Company Site - [Here](https://faceplugin.com)
+
 #### 🤗 Hugging Face - [Here](https://huggingface.co/FacePlugin-Ltd)
+
 #### 🛟 Help Center - [Here](https://doc.faceplugin.com)
+
 #### 🐳 Docker Hub - [Here](https://hub.docker.com/r/faceplugin/document-reader)
 
 # ID Document Recognition SDK — Linux / Docker (Fully On-Premise)
@@ -12,8 +13,6 @@
 > **Fastest:** `docker pull faceplugin/document-reader:latest` → run → copy `FPMC1.…` → activate.
 > **From source:** put files in `lib/cpu/` → `./run.sh` → Postman / `python3 demo`.
 > Jump: [Quick start](#quick-start) · [Start the API](#start-the-api) · [SDK License](#sdk-license) · [Setup](#setup-on-your-own-app) · [About SDK](#about-sdk)
-
-Customer repo: [ID-Document-Recognition-Docker](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Docker)
 
 ## Quick start
 
@@ -38,50 +37,57 @@ This is an **on-premise** FacePlugin SDK. All processing stays on your server �
 
 ### Main Functionalities
 
-| Feature | Supported |
-| ------- | --------- |
-| ID Card / Passport / Driver License | ✓ |
-| MRZ / Barcode / QR / OCR | ✓ |
-| Document detection & classification | ✓ |
-| Auto-capture & image quality | ✓ |
-| Face extraction from document | ✓ |
-| NFC / RFID (where available) | ✓ |
+
+| Feature                             | Supported |
+| ----------------------------------- | --------- |
+| ID Card / Passport / Driver License | ✓         |
+| MRZ / Barcode / QR / OCR            | ✓         |
+| Document detection & classification | ✓         |
+| Auto-capture & image quality        | ✓         |
+| Face extraction from document       | ✓         |
+| NFC / RFID (where available)        | ✓         |
+
 
 ### Product List
 
-| Platform | Repository |
-|----------|------------|
-| Android | [ID-Document-Recognition-Android](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Android) |
-| iOS | [ID-Document-Recognition-iOS](https://github.com/Faceplugin-ltd/ID-Document-Recognition-iOS) |
-| Windows | [ID-Document-Recognition-Windows](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Windows) |
+
+| Platform           | Repository                                                                                                             |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------- |
+| Android            | [ID-Document-Recognition-Android](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Android)                   |
+| iOS                | [ID-Document-Recognition-iOS](https://github.com/Faceplugin-ltd/ID-Document-Recognition-iOS)                           |
+| Windows            | [ID-Document-Recognition-Windows](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Windows)                   |
 | **Linux / Docker** | **[ID-Document-Recognition-Docker](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Docker)** (**this repo**) |
-| React Native | [ID-Document-Recognition-React-Native](https://github.com/Faceplugin-ltd/ID-Document-Recognition-React-Native) |
-| Flutter | [ID-Document-Recognition-Flutter](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Flutter) |
-| Ionic Capacitor | [ID-Document-Recognition-Ionic-Capacitor](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Ionic-Capacitor) |
-| Ionic Cordova | [ID-Document-Recognition-Ionic-Cordova](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Ionic-Cordova) |
+| React Native       | [ID-Document-Recognition-React-Native](https://github.com/Faceplugin-ltd/ID-Document-Recognition-React-Native)         |
+| Flutter            | [ID-Document-Recognition-Flutter](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Flutter)                   |
+| Ionic Capacitor    | [ID-Document-Recognition-Ionic-Capacitor](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Ionic-Capacitor)   |
+| Ionic Cordova      | [ID-Document-Recognition-Ionic-Cordova](https://github.com/Faceplugin-ltd/ID-Document-Recognition-Ionic-Cordova)       |
 
 
 ---
 
 ## Before you start
 
-| Step | What you need |
-| ---- | ------------- |
-| 1 | A Linux host **or** Docker (Desktop or Engine) |
-| 2 | Docker Hub pull does **not** need Drive. Fill `./lib/cpu/` only for Compose / `./run.sh` — see Option B / C under [Start the API](#start-the-api) |
-| 3 | You do not need a license to start the API the first time. Copy the machine code (`FPMC1.…`) from the logs or `GET /api/machinecode`. Send it to FacePlugin ([contact](#contact)) to get an `FP1.…` key and unlock product endpoints. |
+
+| Step | What you need                                                                                                                                                                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | A Linux host **or** Docker (Desktop or Engine)                                                                                                                                                                                        |
+| 2    | Docker Hub pull does **not** need Drive. Fill `./lib/cpu/` only for Compose / `./run.sh` — see Option B / C under [Start the API](#start-the-api)                                                                                     |
+| 3    | You do not need a license to start the API the first time. Copy the machine code (`FPMC1.…`) from the logs or `GET /api/machinecode`. Send it to FacePlugin ([contact](#contact)) to get an `FP1.…` key and unlock product endpoints. |
+
 
 You do **not** need a license to start the API once. Product endpoints unlock after you activate.
 
 ### System requirements
 
-| Item | Minimum | Recommended |
-| ---- | ------- | ----------- |
-| CPU | 2 cores | 8 cores |
-| RAM | 4 GB | 8 GB |
-| Disk | 4 GB | 8 GB |
-| OS | Ubuntu 20.04+ (x86_64) | Ubuntu 22.04 / 24.04 |
-| GPU | — | — (CPU-only product) |
+
+| Item | Minimum                | Recommended          |
+| ---- | ---------------------- | -------------------- |
+| CPU  | 2 cores                | 8 cores              |
+| RAM  | 4 GB                   | 8 GB                 |
+| Disk | 4 GB                   | 8 GB                 |
+| OS   | Ubuntu 20.04+ (x86_64) | Ubuntu 22.04 / 24.04 |
+| GPU  | —                      | — (CPU-only product) |
+
 
 ---
 
@@ -91,9 +97,7 @@ You can start **without** a license — the server prints your machine code on s
 
 The API starts even if activation fails. Copy the **machine code** (`FPMC1.…`) from the log and send it to FacePlugin.
 
-<p align="center">
- <img src="assets/screenshots/unactivated.png" alt="Docker logs: machine code printed, activation failed, Flask API still listening" width="900"/>
-</p>
+
 
 ### Option A — Docker Hub (no Drive download)
 
@@ -149,8 +153,8 @@ git clone https://github.com/Faceplugin-ltd/ID-Document-Recognition-Docker.git
 cd ID-Document-Recognition-Docker
 ```
 
-2. Download **all files** from the Drive folder.
-3. Put every file into `./lib/cpu/` — not inside a nested subfolder under `cpu/`.
+1. Download **all files** from the Drive folder.
+2. Put every file into `./lib/cpu/` — not inside a nested subfolder under `cpu/`.
 
 ```text
 ID-Document-Recognition-Docker/
@@ -193,7 +197,7 @@ cd ID-Document-Recognition-Docker
 # The machine code (FPMC1.…) is printed in the terminal on startup.
 ```
 
-API: **http://127.0.0.1:8082**
+API: **[http://127.0.0.1:8082](http://127.0.0.1:8082)**
 
 ---
 
@@ -223,9 +227,7 @@ curl -s -X POST http://127.0.0.1:8082/api/activate \
 ./run.sh
 ```
 
-<p align="center">
- <img src="assets/screenshots/activate.png" alt="POST /api/activate with license.txt — success true" width="900"/>
-</p>
+
 
 Use the machine code from the environment you will run in production. **Docker and local host codes are different** — if you run in Docker, send the Docker machine code.
 
@@ -233,10 +235,12 @@ Use the machine code from the environment you will run in production. **Docker a
 
 After activation, `GET /api/licenseStatus` reports what the key unlocks. The Gradio demo shows the same summary as **License: …** at the top of the page.
 
-| Capability | Meaning |
-| ---------- | ------- |
-| **Recognition** | OCR / MRZ / Barcode and document classification |
+
+| Capability                  | Meaning                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------- |
+| **Recognition**             | OCR / MRZ / Barcode and document classification                                       |
 | **Liveness** (authenticity) | Security / genuineness checks (Physical document, Security patterns, photo origin, …) |
+
 
 Typical labels:
 
@@ -266,7 +270,7 @@ curl -s http://127.0.0.1:8082/api/health
 
 ### Postman
 
-Import [`postman/DocumentReader-API.postman_collection.json`](postman/DocumentReader-API.postman_collection.json).
+Import `[postman/DocumentReader-API.postman_collection.json](postman/DocumentReader-API.postman_collection.json)`.
 
 Default base URL: `http://127.0.0.1:8082`
 
@@ -290,26 +294,18 @@ DEMO_PORT=9002 API_BASE=http://127.0.0.1:8082 python3 demo
 
 Open **[http://127.0.0.1:9002](http://127.0.0.1:9002)**. Examples when present: `assets/examples/samples/`. The header shows **License:** (for example `Recognition + Liveness`) from `/api/licenseStatus`.
 
-<p align="center">
- <img src="assets/screenshots/demo-ui-result.png" alt="Document Reader Gradio demo — Result tab with verification and OCR fields" width="900"/>
-</p>
 
-<p align="center">
- <img src="assets/screenshots/demo-ui-security.png" alt="Document Reader Gradio demo — Security tab with authenticity checks by page" width="900"/>
-</p>
 
-<p align="center">
- <img src="assets/screenshots/demo-ui-images.png" alt="Document Reader Gradio demo — Images tab with portrait, signature, and cropped pages" width="900"/>
-</p>
 
-<p align="center">
- <img src="assets/screenshots/demo-ui-raw.png" alt="Document Reader Gradio demo — Raw JSON API response" width="900"/>
-</p>
+
+
+
+
 
 - **Result** — status, Verification (Pass / Fail / Not checked), Image QA, and OCR / MRZ / Barcode fields  
 - **Security** — overall and per-page authenticity (`Authenticity: "normal"` or `"strict"`; needs a Liveness-capable license)  
 - **Images** — portrait, signature, ghost portrait, cropped pages  
-- **Raw JSON** — full `/api/documentProcess` response  
+- **Raw JSON** — full `/api/documentProcess` response
 
 ---
 
@@ -325,7 +321,7 @@ curl -s -X POST http://127.0.0.1:8082/api/documentProcess \
   -d '{"images":[{"image":"<BASE64>"}],"response":{"OCR":"normal","MRZ":"normal","Barcode":"normal","Authenticity":"normal"}}'
 ```
 
-**Python in-process** — keep `lib/cpu/` beside [`sdk.py`](sdk.py):
+**Python in-process** — keep `lib/cpu/` beside `[sdk.py](sdk.py)`:
 
 ```python
 import sdk
@@ -344,7 +340,7 @@ result = sdk.document_process(
 
 ## About SDK
 
-Use the Python bindings in [`sdk.py`](sdk.py). Return code `0` means success.
+Use the Python bindings in `[sdk.py](sdk.py)`. Return code `0` means success.
 
 ```python
 import sdk
@@ -381,7 +377,4 @@ HTTP endpoints: `/api/health`, `/api/machinecode`, `/api/licenseStatus`, `/api/b
 
 ## Contact
 
-<div align="left">
-<a target="_blank" href="mailto:info@faceplugin.com"><img src="https://img.shields.io/badge/email-info@faceplugin.com-blue.svg?logo=gmail" alt="faceplugin.com"></a>&emsp;
-<a target="_blank" href="https://wa.me/+14692784822"><img src="https://img.shields.io/badge/whatsapp-faceplugin-blue.svg?logo=whatsapp" alt="faceplugin.com"></a>
-</div>
+ 
