@@ -252,6 +252,7 @@ Typical labels:
 
 - **Recognition + Liveness** — full demo (Result + Security tabs)
 - **Recognition** — OCR/MRZ/Barcode only; Security stays empty / not checked
+- **Liveness** — Security checks only; OCR/MRZ/Barcode stays empty / not checked
 - **Not licensed** — machine code only until you activate
 
 Check status anytime:
@@ -260,7 +261,7 @@ Check status anytime:
 curl -s http://127.0.0.1:8082/api/licenseStatus
 ```
 
-Request authenticity in `documentProcess` with `"Authenticity": "normal"` (or `"strict"`). `"none"` turns Security off. The demo and Postman default to `"normal"`.
+Request authenticity in `documentProcess` with `"Authenticity": "normal"`. `"none"` turns Security off. The demo and Postman default to `"normal"`.
 
 ## Try it
 
@@ -317,7 +318,7 @@ Open **[http://127.0.0.1:9002](http://127.0.0.1:9002)**. Examples when present: 
 
 
 - **Result** — status, Verification (Pass / Fail / Not checked), Image QA, and OCR / MRZ / Barcode fields  
-- **Security** — overall and per-page authenticity (`Authenticity: "normal"` or `"strict"`; needs a Liveness-capable license)  
+- **Security** — overall and per-page authenticity (`Authenticity: "normal"`; needs a Liveness-capable license)  
 - **Images** — portrait, signature, ghost portrait, cropped pages  
 - **Raw JSON** — full `/api/documentProcess` response
 
