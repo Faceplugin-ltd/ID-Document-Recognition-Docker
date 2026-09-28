@@ -7,7 +7,6 @@
 #### 🤗 Hugging Face - [Here](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK)
 
 #### 🛟 Help Center - [Here](https://doc.faceplugin.com)
-#### ✈️ Telegram - [@facepluginSDK](https://t.me/facepluginSDK)
 
 #### 🐳 Docker Hub - [Here](https://hub.docker.com/r/faceplugin/document-reader)
 
