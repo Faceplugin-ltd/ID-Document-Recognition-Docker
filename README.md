@@ -423,6 +423,6 @@ Request a license, machine-code activation (`FPMC1.…` → `FP1.…`), or integ
 
 <div align="left">
 <a target="_blank" href="mailto:info@faceplugin.com"><img src="https://img.shields.io/badge/email-info@faceplugin.com-blue.svg?logo=gmail" alt="Email FacePlugin info@faceplugin.com"></a>&emsp;
-<a target="_blank" href="https://t.me/facepluginSDK"><img src="https://img.shields.io/badge/telegram-@facepluginSDK-blue.svg?logo=telegram" alt="Telegram @facepluginSDK"></a>&emsp;
+<a target="_blank" href="https://t.me/FacePluginSupport"><img src="https://img.shields.io/badge/telegram-@FacePluginSupport-blue.svg?logo=telegram" alt="Telegram @FacePluginSupport"></a>&emsp;
 <a target="_blank" href="https://wa.me/+14692784822"><img src="https://img.shields.io/badge/whatsapp-+1_469_278_4822-blue.svg?logo=whatsapp" alt="WhatsApp +1 469 278 4822"></a>
 </div>
