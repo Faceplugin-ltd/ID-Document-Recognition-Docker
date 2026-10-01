@@ -406,17 +406,6 @@ Optional session APIs: `sdk.start_new_session()`, `sdk.start_new_page()`, `sdk.u
 
 HTTP endpoints: `/api/health`, `/api/machinecode`, `/api/licenseStatus`, `/api/backend`, `/api/activate`, `/api/documentRecognition`, `/api/documentLiveness`, `/api/documentProcess`, `/api/generalProcess`.
 
-## Company Overview
-
-**FacePlugin** builds **on-premises biometric AI SDKs** for **face recognition**, **face liveness detection** (presentation-attack detection), **deepfake detection**, **ID document recognition** (OCR / MRZ / barcode), **ID document liveness**, and full **eKYC / identity verification** workflows.
-
-Deploy on your own servers, private cloud, or fully on-device. **Biometric data never leaves your infrastructure.** Face matching is **NIST FRVT**-evaluated; liveness targets **iBeta Level 2** class PAD. License once for **unlimited on-prem inference** — **no per-call fees**.
-
-- Website: [faceplugin.com](https://faceplugin.com)
-- Docs: [doc.faceplugin.com](https://doc.faceplugin.com)
-- Hugging Face demo: [ID-Document-Recognition-SDK](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK)
-- Docker Hub: [faceplugin/document-reader](https://hub.docker.com/r/faceplugin/document-reader)
-
 ## Contact
 
 Request a license, machine-code activation (`FPMC1.…` → `FP1.…`), or integration help:
