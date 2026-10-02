@@ -12,8 +12,8 @@
 
 # FacePlugin ID Document Recognition SDK — Linux / Docker (Fully On-Premise)
 
-> **Fastest:** `docker pull faceplugin/document-reader:latest` → run → copy `FPMC1.…` → activate.
-> **From source:** put files in `lib/cpu/` → `./run.sh` → Postman / `python3 demo`.
+> **Fastest:** `docker pull faceplugin/document-reader:latest` → run → copy machine code → activate.
+> **Docker Hub:** pull the image below → Postman / curl / Gradio demo. Need Compose or native? [Contact us](#contact).
 > **Try online:** [Hugging Face Space](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK) (Gradio UI → your Linux API).
 > Jump: [Quick start](#quick-start) · [Start the API](#start-the-api) · [SDK License](#sdk-license) · [Company Overview](#company-overview) · [Setup](#setup-on-your-own-app) · [About SDK](#about-sdk) · [Contact](#contact)
 
@@ -21,7 +21,7 @@
 
 - [ ] Download and run the appropriate Docker image from [FacePlugin Docker Hub](https://hub.docker.com/r/faceplugin/document-reader). [See Option A for details](#option-a--docker-hub-no-drive-download).
 - [ ] **Confirm it is running:** `curl -s http://127.0.0.1:8082/api/health` (no license needed yet)
-- [ ] [Contact us](#contact) with your machine code (`FPMC1.…`) to obtain a license key, then activate with `POST /api/activate` — [SDK License](#sdk-license)
+- [ ] [Contact us](#contact) with your machine code to obtain a license key, then activate with `POST /api/activate` — [SDK License](#sdk-license)
 - [ ] **Try it:** Postman, curl, or local Gradio demo on **9002** (`python3 demo`)
 
 Docs: [https://doc.faceplugin.com](https://doc.faceplugin.com)
@@ -75,8 +75,8 @@ All processing stays on your server. **No** biometric data is sent to FacePlugin
 | Step | What you need                                                                                                                                                                                                                         |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | A Linux host **or** Docker (Desktop or Engine)                                                                                                                                                                                        |
-| 2    | Docker Hub pull does **not** need Drive. Fill `./lib/cpu/` only for Compose / `./run.sh` — see Option B / C under [Start the API](#start-the-api)                                                                                     |
-| 3    | You do not need a license to start the API the first time. Copy the machine code (`FPMC1.…`) from the logs or `GET /api/machinecode`. Send it to FacePlugin ([contact](#contact)) to get an `FP1.…` key and unlock product endpoints. |
+| 2    | Docker Hub pull does **not** need Drive — [see Option A](#option-a--docker-hub-no-drive-download)
+| 3    | You do not need a license to start the API the first time. Copy the machine code from the logs or `GET /api/machinecode`. Send it to FacePlugin ([contact](#contact)) to get a license key and unlock product endpoints. |
 
 
 You do **not** need a license to start the API once. Product endpoints unlock after you activate.
@@ -99,7 +99,7 @@ You do **not** need a license to start the API once. Product endpoints unlock af
 
 You can start **without** a license — the server prints your machine code on startup.
 
-The API starts even if activation fails. Copy the **machine code** (`FPMC1.…`) from the log and send it to FacePlugin.
+The API starts even if activation fails. Copy the **machine code** from the log and send it to FacePlugin.
 
 <p align="center">
  <img src="https://raw.githubusercontent.com/Faceplugin-ltd/faceplugin-assets/main/screenshots/document-reader/desktop/unactivated.png" alt="Docker logs: machine code printed, activation failed, Flask API still listening" width="900"/>
@@ -117,7 +117,7 @@ docker run -d --name faceplugin-document-reader \
   -v /etc/machine-id:/etc/machine-id:ro \
   faceplugin/document-reader:latest
 sudo docker logs -f faceplugin-document-reader
-# Look for the machine code line: FPMC1.…
+# Look for the machine code line in the logs
 ```
 
 `--shm-size=2gb` is required (`dcr.fpk` extracts to `/dev/shm`). Keep `--privileged` and the `/etc/machine-id` volume as shown.
@@ -138,7 +138,7 @@ sudo docker run -d --name faceplugin-document-reader-2 \
   faceplugin/document-reader:latest
 ```
 
-You can then activate each container using the same `FP1.…` license key.
+You can then activate each container using the same license key.
 
 Note: On Docker Desktop (macOS/Windows), do not use the `/etc/machine-id` volume. Each container may require its own license.
 
@@ -179,58 +179,29 @@ ls lib/cpu/libDocumentEngine.so
 ls lib/cpu/dcr.fpk
 ```
 
-### Option B — Docker Compose
 
-Requires `./lib/cpu/` filled from Drive (above).
+### Need Docker Compose or a native install?
 
-```bash
-cd ID-Document-Recognition-Docker
-# macOS/Windows Docker Desktop: remove the /etc/machine-id volume from docker-compose.yml first
-sudo docker compose up --build -d
-sudo docker compose logs -f
-# Look for the machine code line: FPMC1.…
-# Detached Compose has no TTY — there is no license prompt. Activate with curl (below).
-```
+The steps above (Docker Hub) are enough for most teams. If you need **Docker Compose** with a local build, or a **native Linux** install without Docker Hub, [contact FacePlugin](#contact) and we will share the Drive runtime package and setup for your environment.
 
-### Option C — Native Linux (no Docker)
-
-Requires `./lib/cpu/` filled from Drive (above).
-
-```bash
-cd ID-Document-Recognition-Docker
-./run.sh
-# or: python3 app.py
-# The machine code (FPMC1.…) is printed in the terminal on startup.
-```
-
-API: **[http://127.0.0.1:8082](http://127.0.0.1:8082)**
-
----
 
 ## SDK License
 
-Licenses are **offline** and bound to your machine code (`FPMC1.…`).
+Licenses are **offline** and bound to your machine code.
 
-1. **Start the server** ([above](#start-the-api)) — Docker or local. A license is not required for the first start.
-2. **Copy the machine code** from the startup log. It looks like `FPMC1.…`.
-3. **Send that machine code** to FacePlugin ([contact](#contact)). We will issue an `FP1.…` key for that code.
+1. **Start the server** ([above](#start-the-api)) with Docker Hub. A license is not required for the first start.
+2. **Copy the machine code** from the startup log. Copy it from the logs or `GET /api/machinecode`.
+3. **Send that machine code** to FacePlugin ([contact](#contact)). We will issue a license key for that code.
 4. **Activate** with the license key:
 
 ```bash
-# Paste the FP1. key into ./license.txt (overwrite the file).
+# Paste the license key into ./license.txt (overwrite the file).
 
-# Docker Hub (A) and Compose (B) both expose the API on this host port.
-# `docker compose up -d` does not activate — the container is already running
-# with no TTY, so it will not re-read license.txt. POST the key instead:
+# Detached Docker will not re-read license.txt on its own — POST the key:
 curl -s -X POST http://127.0.0.1:8082/api/activate \
   -H 'Content-Type: text/plain' \
   --data-binary @license.txt
 
-# Compose alternative: after writing license.txt, restart so startup activates:
-# sudo docker compose restart
-
-# Local (Option C): stop the process (Ctrl+C), then:
-./run.sh
 ```
 
 <p align="center">
@@ -336,7 +307,7 @@ Open **[http://127.0.0.1:9002](http://127.0.0.1:9002)**. Examples when present: 
 
 Two paths. You do **not** need the Gradio demo in production.
 
-**HTTP** (any language) — run Option A, B, or C, then call the API:
+**HTTP** (any language) — start the API (Option A above), then call:
 
 ```bash
 curl -s -X POST http://127.0.0.1:8082/api/documentRecognition \
@@ -355,7 +326,7 @@ curl -s -X POST http://127.0.0.1:8082/api/documentProcess \
 ```python
 import sdk
 
-machine_code = sdk.get_machine_code()  # FPMC1.…
+machine_code = sdk.get_machine_code()  # machine code
 sdk.activate("license.txt")
 sdk.init_sdk()
 result = sdk.document_process(
@@ -375,7 +346,7 @@ Use the Python bindings in `[sdk.py](sdk.py)`. Return code `0` means success.
 import sdk
 
 machine_code = sdk.get_machine_code()
-print("machineCode:", machine_code)  # FPMC1.…
+print("machineCode:", machine_code)  # machine code
 
 ret = sdk.activate("license.txt")
 ret = sdk.init_sdk()
@@ -406,9 +377,20 @@ Optional session APIs: `sdk.start_new_session()`, `sdk.start_new_page()`, `sdk.u
 
 HTTP endpoints: `/api/health`, `/api/machinecode`, `/api/licenseStatus`, `/api/backend`, `/api/activate`, `/api/documentRecognition`, `/api/documentLiveness`, `/api/documentProcess`, `/api/generalProcess`.
 
+## Company Overview
+
+**FacePlugin** builds **on-premises biometric AI SDKs** for **face recognition**, **face liveness detection** (presentation-attack detection), **deepfake detection**, **ID document recognition** (OCR / MRZ / barcode), **ID document liveness**, and full **eKYC / identity verification** workflows.
+
+Deploy on your own servers, private cloud, or fully on-device. **Biometric data never leaves your infrastructure.** Face matching is **NIST FRVT**-evaluated; liveness targets **iBeta Level 2** class PAD. License once for **unlimited on-prem inference** — **no per-call fees**.
+
+- Website: [faceplugin.com](https://faceplugin.com)
+- Docs: [doc.faceplugin.com](https://doc.faceplugin.com)
+- Hugging Face demo: [ID-Document-Recognition-SDK](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK)
+- Docker Hub: [faceplugin/document-reader](https://hub.docker.com/r/faceplugin/document-reader)
+
 ## Contact
 
-Request a license, machine-code activation (`FPMC1.…` → `FP1.…`), or integration help:
+Request a license, machine-code activation (machine code → license key), or integration help:
 
 <div align="left">
 <a target="_blank" href="mailto:info@faceplugin.com"><img src="https://img.shields.io/badge/email-info@faceplugin.com-blue.svg?logo=gmail" alt="Email FacePlugin info@faceplugin.com"></a>&emsp;
