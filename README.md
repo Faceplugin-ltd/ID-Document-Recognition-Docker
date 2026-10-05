@@ -12,19 +12,22 @@
 
 # FacePlugin ID Document Recognition SDK — Linux / Docker (Fully On-Premise)
 
-> **Fastest:** `docker pull faceplugin/document-reader:latest` → run → copy machine code → activate.
-> **Docker Hub:** pull the image below → Postman / curl / Gradio demo. Need Compose or native? [Contact us](#contact).
-> **Try online:** [Hugging Face Space](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK) (Gradio UI → your Linux API).
+> **Fastest:** `docker pull faceplugin/document-reader:latest` → run → copy machine code → activate.  
+> **Local Linux:** put runtime under `lib/cpu/` → `./run.sh` → activate.  
+> **Docker Hub:** no Drive download. **Local:** Google Drive → `lib/cpu/` — see Option B.  
+> **Try online:** [Hugging Face Space](https://huggingface.co/spaces/FacePlugin-Ltd/ID-Document-Recognition-SDK) (Gradio UI → your Linux API).  
 > Jump: [Quick start](#quick-start) · [Start the API](#start-the-api) · [SDK License](#sdk-license) · [Company Overview](#company-overview) · [Setup](#setup-on-your-own-app) · [About SDK](#about-sdk) · [Contact](#contact)
 
 ## Quick start
 
-- [ ] Download and run the appropriate Docker image from [FacePlugin Docker Hub](https://hub.docker.com/r/faceplugin/document-reader). [See Option A for details](#option-a--docker-hub-no-drive-download).
+- [ ] **Docker (recommended):** `docker pull faceplugin/document-reader:latest` then `docker run` — [Option A](#option-a--docker-hub-no-drive-download)
+- [ ] **Or local:** download CPU runtime into `lib/cpu/` — [Option B](#option-b--local-linux-runsh), then `./run.sh` — API on **8082**
 - [ ] **Confirm it is running:** `curl -s http://127.0.0.1:8082/api/health` (no license needed yet)
 - [ ] [Contact us](#contact) with your machine code to obtain a license key, then activate with `POST /api/activate` — [SDK License](#sdk-license)
 - [ ] **Try it:** Postman, curl, or local Gradio demo on **9002** (`python3 demo`)
 
 Docs: [https://doc.faceplugin.com](https://doc.faceplugin.com)
+
 
 ## Introduction
 
@@ -75,7 +78,7 @@ All processing stays on your server. **No** biometric data is sent to FacePlugin
 | Step | What you need                                                                                                                                                                                                                         |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | A Linux host **or** Docker (Desktop or Engine)                                                                                                                                                                                        |
-| 2    | Docker Hub pull does **not** need Drive — [see Option A](#option-a--docker-hub-no-drive-download)
+| 2    | **Docker:** Hub pull only (no Drive). **Local:** Google Drive → `lib/cpu/` — [Option B](#option-b--local-linux-runsh)
 | 3    | You do not need a license to start the API the first time. Copy the machine code from the logs or `GET /api/machinecode`. Send it to FacePlugin ([contact](#contact)) to get a license key and unlock product endpoints. |
 
 
@@ -111,7 +114,7 @@ Runtime is already inside the image. No Google Drive step.
 
 ```bash
 sudo docker pull faceplugin/document-reader:latest
-docker run -d --name faceplugin-document-reader \
+sudo docker run -d --name faceplugin-document-reader \
   --shm-size=2gb --privileged \
   -p 8082:8082 \
   -v /etc/machine-id:/etc/machine-id:ro \
@@ -122,33 +125,21 @@ sudo docker logs -f faceplugin-document-reader
 
 `--shm-size=2gb` is required (`dcr.fpk` extracts to `/dev/shm`). Keep `--privileged` and the `/etc/machine-id` volume as shown.
 
-### Optional — Run multiple containers with one license
+On Docker Desktop (macOS/Windows) omit the `/etc/machine-id` volume.
 
-You only need this section if you want to run multiple DocumentReader containers on the same Linux host.
+### Run multiple containers
 
-On Linux, mount `/etc/machine-id` into each container so they use the same machine code. Each container must have a different container name and host port.
+To run multiple containers on one Linux host with a shared machine code / license, see the docs:
 
-For example:
+[https://doc.faceplugin.com/id-document-recognition-sdk/server-sdk/id-document-recognition-linux-sdk#run-multiple-containers](https://doc.faceplugin.com/id-document-recognition-sdk/server-sdk/id-document-recognition-linux-sdk#run-multiple-containers)
 
-```bash
-sudo docker run -d --name faceplugin-document-reader-2 \
-  --shm-size=2gb --privileged \
-  -p 8083:8082 \
-  -v /etc/machine-id:/etc/machine-id:ro \
-  faceplugin/document-reader:latest
-```
+### Option B — Local Linux (`./run.sh`)
 
-You can then activate each container using the same license key.
+Requires the Google Drive runtime under `lib/cpu/`. Needs glibc **2.38+** (for example Ubuntu 24.04).
 
-Note: On Docker Desktop (macOS/Windows), do not use the `/etc/machine-id` volume. Each container may require its own license.
+#### Get the runtime
 
-### Download runtime libraries (lib folder) — Options B and C only
-
-**Skip this if you used Docker Hub** (`docker pull` / `docker run`). Runtime is already inside the image.
-
-The `./lib/` tree is empty on GitHub because native binaries and model files are too large.
-
-If you are building or running directly from this repository, download the **CPU** package into `./lib/cpu/`. DocumentReader is **CPU-only** — there is no `gpu/` package.
+The `./lib/cpu/` tree is empty on GitHub because native binaries and model files are too large. This product is **CPU-only**.
 
 **[DocumentReader Linux runtime (Google Drive)](https://drive.google.com/drive/folders/16DFGKtyGbyL-0gfVOmNVaQ9vgXCYDr2M)**
 
@@ -159,8 +150,9 @@ git clone https://github.com/Faceplugin-ltd/ID-Document-Recognition-Docker.git
 cd ID-Document-Recognition-Docker
 ```
 
-1. Download **all files** from the Drive folder.
-2. Put every file into `./lib/cpu/` — not inside a nested subfolder under `cpu/`.
+2. Open the Google Drive folder above.
+3. Download **all files** in that folder.
+4. Put every file **directly** into `./lib/cpu/` — not inside a nested subfolder.
 
 ```text
 ID-Document-Recognition-Docker/
@@ -168,7 +160,8 @@ ID-Document-Recognition-Docker/
     └── cpu/
         ├── libDocSDK.so
         ├── libDocumentEngine.so
-        └── dcr.fpk
+        ├── dcr.fpk
+        └── ... (other runtimes from Drive)
 ```
 
 Wrong layout: `lib/cpu/SomeFolder/libDocSDK.so`.
@@ -179,17 +172,23 @@ ls lib/cpu/libDocumentEngine.so
 ls lib/cpu/dcr.fpk
 ```
 
+#### Run
 
-### Need Docker Compose or a native install?
+```bash
+pip3 install -r requirements.txt
+./run.sh
+```
 
-The steps above (Docker Hub) are enough for most teams. If you need **Docker Compose** with a local build, or a **native Linux** install without Docker Hub, [contact FacePlugin](#contact) and we will share the Drive runtime package and setup for your environment.
+API: **http://127.0.0.1:8082**
+
+Copy the **machine code** from the terminal (or `GET /api/machinecode`), then activate with `POST /api/activate` or paste the license key when prompted.
 
 
 ## SDK License
 
 Licenses are **offline** and bound to your machine code.
 
-1. **Start the server** ([above](#start-the-api)) with Docker Hub. A license is not required for the first start.
+1. **Start the server** ([above](#start-the-api)) with Docker Hub or local `./run.sh`. A license is not required for the first start.
 2. **Copy the machine code** from the startup log. Copy it from the logs or `GET /api/machinecode`.
 3. **Send that machine code** to FacePlugin ([contact](#contact)). We will issue a license key for that code.
 4. **Activate** with the license key:
