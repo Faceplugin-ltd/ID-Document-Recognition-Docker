@@ -15,7 +15,7 @@
 ## Quick start
 
 - **Docker (recommended):** `docker pull faceplugin/document-reader:latest` then `docker run` — [Option A](#option-a--docker-hub)
-- **Or local:** download CPU runtime into `lib/cpu/` — [Option B](#option-b-local-linux-runsh), then `./run.sh` — API on **8082**
+- **Or local:** download CPU runtime into `lib/cpu/` — [Option B](#option-b--local-linux-runsh), then `./run.sh` — API on **8082**
 - **Confirm it is running:** `curl -s http://127.0.0.1:8082/api/health` (no license needed yet)
 - [Contact us](#contact) with your machine code to obtain a license key, then activate with `POST /api/activate` — [Activate your license](#activate-your-license)
 - **Try it:** Postman, curl, or local Gradio demo on **9002** (`python3 demo`)
