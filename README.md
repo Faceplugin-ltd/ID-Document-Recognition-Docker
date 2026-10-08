@@ -93,7 +93,7 @@ To run multiple containers on one Linux host with a shared machine code / licens
 
 [https://doc.faceplugin.com/id-document-recognition-sdk/server-sdk/id-document-recognition-linux-sdk#run-multiple-containers](https://doc.faceplugin.com/id-document-recognition-sdk/server-sdk/id-document-recognition-linux-sdk#run-multiple-containers)
 
-### Option B: Local Linux (`./run.sh`)
+### Option B — Local Linux (`./run.sh`)
 
 This option runs the server directly on your machine. It requires glibc **2.38 or newer** (for example, Ubuntu 24.04). Check your version with `ldd --version`. No GPU is needed; this product runs on CPU only.
 
